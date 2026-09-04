@@ -9,6 +9,24 @@
     var raw = (cell.querySelector('.num, .rank') || cell).textContent.replace(/[^0-9.]/g, '');
     return raw === '' ? -1 : parseFloat(raw);
   }
+  var btn = document.getElementById('toggle-unconfirmed');
+  if (btn) {
+    var hiddenCount = document.querySelectorAll('tr.unconfirmed').length;
+    btn.addEventListener('click', function () {
+      var on = document.body.classList.toggle('show-unconfirmed');
+      btn.setAttribute('aria-pressed', String(on));
+      btn.textContent = on ? 'Hide unconfirmed' : 'Show unconfirmed (' + hiddenCount + ')';
+      // The board ranks whoever is on screen, so the numbers change with it.
+      rows.forEach(function (r) {
+        r.querySelector('.rank').textContent =
+          on ? r.dataset.rankAll : (r.dataset.rankConfirmed || '—');
+      });
+      document.querySelectorAll('[data-all]').forEach(function (el) {
+        el.textContent = on ? el.dataset.all : el.dataset.confirmed;
+      });
+    });
+  }
+
   table.tHead.addEventListener('click', function (e) {
     var th = e.target.closest('th');
     if (!th) return;

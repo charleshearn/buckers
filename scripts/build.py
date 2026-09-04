@@ -33,9 +33,11 @@ def load_roster(players):
 
 ROSTER, NEW = load_roster(DATA["players"])
 HIDDEN = [p for p in DATA["players"] if not ROSTER[p["id"]]["show"]]
-P = [p for p in DATA["players"] if ROSTER[p["id"]]["show"]]
-P.sort(key=lambda p: -(p["season_score"] or 0))
-for i, p in enumerate(P, 1):          # ranks are over the visible board only
+ALL = sorted(DATA["players"], key=lambda p: -(p["season_score"] or 0))
+for i, p in enumerate(ALL, 1):        # rank if every hunter on the cabinet counted
+    p["rank_all"] = i
+P = [p for p in ALL if ROSTER[p["id"]]["show"]]
+for i, p in enumerate(P, 1):          # rank across the confirmed crew only
     p["house_rank"] = i
 
 
@@ -59,7 +61,7 @@ def join_year(p):
 def pills(p):
     out = []
     g = life(p, "global_rank")
-    if p["house_rank"] == 1:
+    if p.get("house_rank") == 1:
         out.append(("champ", "House Champ"))
     if g and g <= 500:
         out.append(("gold", f"Global #{g}"))
@@ -105,24 +107,42 @@ hidden_note = (
     f"{len(HIDDEN)} unrecognized {'account' if len(HIDDEN) == 1 else 'accounts'} hidden. "
 ) if HIDDEN else ""
 
+toggle_btn = (
+    f'<button type="button" id="toggle-unconfirmed" class="toggle" aria-pressed="false">'
+    f'Show unconfirmed ({len(HIDDEN)})</button>'
+) if HIDDEN else ""
+
+# Defensive: the champion panel describes the confirmed crew. Say so if an
+# unconfirmed account is actually outscoring them.
+outscoring = [p for p in HIDDEN if (p["season_score"] or 0) > (P[0]["season_score"] or 0)]
+champ_caveat = (
+    f' <em class="caveat">{len(outscoring)} unconfirmed '
+    f'{"hunter" if len(outscoring) == 1 else "hunters"} currently outscore the crew.</em>'
+) if outscoring else ""
+
 champ = P[0]
 runner = P[1]
 gap = champ["season_score"] - runner["season_score"]
 total_bucks = sum(life(p, "bucks_killed") or 0 for p in P)
 total_life = sum(life(p, "cumulative_score") or 0 for p in P)
+all_bucks = sum(life(p, "bucks_killed") or 0 for p in ALL)
+all_life = sum(life(p, "cumulative_score") or 0 for p in ALL)
 field = life(champ, "global_player_count")
 max_season = max(p["season_score"] for p in P)
 fetched = datetime.fromisoformat(DATA["fetched_at"]).strftime("%b %-d, %Y at %-I:%M %p UTC")
 
 # ---- rows ----------------------------------------------------------------
 rows = []
-for p in P:
+for p in ALL:
+    confirmed = ROSTER[p["id"]]["show"]
     ps = "".join(
         f'<span class="pill pill--{k}">{html.escape(t)}</span>' for k, t in pills(p)
     )
+    if not confirmed:
+        ps += '<span class="pill pill--note">Unconfirmed</span>'
     acc = p["accuracy"] or 0
-    rows.append(f'''          <tr data-rank="{p['house_rank']}">
-            <td class="c-rank"><span class="rank">{p['house_rank']}</span></td>
+    rows.append(f'''          <tr class="{'' if confirmed else 'unconfirmed'}" data-rank-all="{p['rank_all']}" data-rank-confirmed="{p.get('house_rank', '')}">
+            <td class="c-rank"><span class="rank">{p.get('house_rank', '—')}</span></td>
             <td class="c-name">
               <a class="pname" href="{html.escape(p['profile_url'])}" target="_blank" rel="noopener">{html.escape(p['name'])}</a>
               <span class="meta">Hunting since {html.escape(life(p,'hunting_since') or '—')}</span>
@@ -255,6 +275,29 @@ h2 {{
 .sec-note {{
   font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.06em; color:var(--muted);
 }}
+.sec-actions {{ display:flex; align-items:center; gap:14px; flex-wrap:wrap; }}
+.toggle {{
+  font-family:"IBM Plex Mono",monospace; font-size:10px; font-weight:600;
+  letter-spacing:.13em; text-transform:uppercase; padding:6px 11px;
+  background:transparent; color:var(--muted); border:1px solid var(--line-strong);
+  cursor:pointer; transition:color .12s, border-color .12s, background .12s;
+}}
+.toggle:hover {{ color:var(--blaze); border-color:var(--blaze); }}
+.toggle[aria-pressed="true"] {{
+  background:var(--blaze); border-color:var(--blaze); color:var(--surface);
+}}
+.caveat {{ color:var(--brass); font-style:italic; }}
+
+/* Unconfirmed rows ship in the markup but stay collapsed until asked for. */
+tbody tr.unconfirmed {{ display:none; }}
+body.show-unconfirmed tbody tr.unconfirmed {{ display:table-row; }}
+tr.unconfirmed .pname, tr.unconfirmed .num, tr.unconfirmed .rank {{ color:var(--muted); }}
+tr.unconfirmed .bar i {{ background:var(--line-strong); }}
+.uc-note {{
+  display:none; font-size:.86rem; color:var(--muted); max-width:74ch;
+  margin:-34px 0 46px; line-height:1.6;
+}}
+body.show-unconfirmed .uc-note {{ display:block; }}
 
 /* ---- table ---- */
 .tablewrap {{ overflow-x:auto; margin-bottom:56px; }}
@@ -353,9 +396,9 @@ footer a {{ color:var(--blaze); }}
       <p class="marquee__sub">Standings for the crew on the Alloy office cabinet, pulled straight from the official Big Buck Hunter world leaderboard.</p>
     </div>
     <div class="marquee__stats">
-      <div class="mstat"><b>{len(P)}</b><span>Hunters</span></div>
-      <div class="mstat"><b>{total_bucks:,}</b><span>Bucks taken</span></div>
-      <div class="mstat"><b>{total_life/1_000_000:.1f}M</b><span>Lifetime points</span></div>
+      <div class="mstat"><b data-confirmed="{len(P)}" data-all="{len(ALL)}">{len(P)}</b><span>Hunters</span></div>
+      <div class="mstat"><b data-confirmed="{total_bucks:,}" data-all="{all_bucks:,}">{total_bucks:,}</b><span>Bucks taken</span></div>
+      <div class="mstat"><b data-confirmed="{total_life/1_000_000:.1f}M" data-all="{all_life/1_000_000:.1f}M">{total_life/1_000_000:.1f}M</b><span>Lifetime points</span></div>
     </div>
   </header>
 
@@ -363,7 +406,7 @@ footer a {{ color:var(--blaze); }}
     <div class="champ__main">
       <span class="champ__crown">Reigning house champion</span>
       <p class="champ__name">{html.escape(champ['name'])}</p>
-      <p class="champ__line">Leads the office by <strong>{gap:,}</strong> points over {html.escape(runner['name'])}, and sits <strong>#{life(champ,'global_rank'):,}</strong> of {field:,} hunters worldwide — the top {life(champ,'global_rank')/field*100:.1f}% of the planet.</p>
+      <p class="champ__line">Leads the office by <strong>{gap:,}</strong> points over {html.escape(runner['name'])}, and sits <strong>#{life(champ,'global_rank'):,}</strong> of {field:,} hunters worldwide — the top {life(champ,'global_rank')/field*100:.1f}% of the planet.{champ_caveat}</p>
     </div>
     <div class="champ__grid">
       <div class="cg"><b>{champ['season_score']:,}</b><span>Season points</span></div>
@@ -375,7 +418,10 @@ footer a {{ color:var(--blaze); }}
 
   <div class="sec-head">
     <h2>Standings</h2>
-    <span class="sec-note">Click any column to re-sort</span>
+    <span class="sec-actions">
+      <span class="sec-note">Click any column to re-sort</span>
+      {toggle_btn}
+    </span>
   </div>
   <div class="tablewrap">
     <table id="board">
@@ -397,9 +443,11 @@ footer a {{ color:var(--blaze); }}
     </table>
   </div>
 
+  <p class="uc-note">Unconfirmed hunters are accounts the Big Buck Hunter network assigns to this cabinet that nobody here recognized &mdash; visitors, one-offs, or accounts older than the machine. Ranks and totals above include them while this view is on; house records below always reflect the confirmed crew.</p>
+
   <div class="sec-head">
     <h2>House records</h2>
-    <span class="sec-note">All time, all hunters</span>
+    <span class="sec-note">All time, confirmed crew</span>
   </div>
   <div class="records">
 {recs}
@@ -424,6 +472,24 @@ footer a {{ color:var(--blaze); }}
     var raw = (cell.querySelector('.num, .rank') || cell).textContent.replace(/[^0-9.]/g, '');
     return raw === '' ? -1 : parseFloat(raw);
   }}
+  var btn = document.getElementById('toggle-unconfirmed');
+  if (btn) {{
+    var hiddenCount = document.querySelectorAll('tr.unconfirmed').length;
+    btn.addEventListener('click', function () {{
+      var on = document.body.classList.toggle('show-unconfirmed');
+      btn.setAttribute('aria-pressed', String(on));
+      btn.textContent = on ? 'Hide unconfirmed' : 'Show unconfirmed (' + hiddenCount + ')';
+      // The board ranks whoever is on screen, so the numbers change with it.
+      rows.forEach(function (r) {{
+        r.querySelector('.rank').textContent =
+          on ? r.dataset.rankAll : (r.dataset.rankConfirmed || '—');
+      }});
+      document.querySelectorAll('[data-all]').forEach(function (el) {{
+        el.textContent = on ? el.dataset.all : el.dataset.confirmed;
+      }});
+    }});
+  }}
+
   table.tHead.addEventListener('click', function (e) {{
     var th = e.target.closest('th');
     if (!th) return;

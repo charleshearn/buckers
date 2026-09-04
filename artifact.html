@@ -104,6 +104,29 @@ h2 {
 .sec-note {
   font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.06em; color:var(--muted);
 }
+.sec-actions { display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+.toggle {
+  font-family:"IBM Plex Mono",monospace; font-size:10px; font-weight:600;
+  letter-spacing:.13em; text-transform:uppercase; padding:6px 11px;
+  background:transparent; color:var(--muted); border:1px solid var(--line-strong);
+  cursor:pointer; transition:color .12s, border-color .12s, background .12s;
+}
+.toggle:hover { color:var(--blaze); border-color:var(--blaze); }
+.toggle[aria-pressed="true"] {
+  background:var(--blaze); border-color:var(--blaze); color:var(--surface);
+}
+.caveat { color:var(--brass); font-style:italic; }
+
+/* Unconfirmed rows ship in the markup but stay collapsed until asked for. */
+tbody tr.unconfirmed { display:none; }
+body.show-unconfirmed tbody tr.unconfirmed { display:table-row; }
+tr.unconfirmed .pname, tr.unconfirmed .num, tr.unconfirmed .rank { color:var(--muted); }
+tr.unconfirmed .bar i { background:var(--line-strong); }
+.uc-note {
+  display:none; font-size:.86rem; color:var(--muted); max-width:74ch;
+  margin:-34px 0 46px; line-height:1.6;
+}
+body.show-unconfirmed .uc-note { display:block; }
 
 /* ---- table ---- */
 .tablewrap { overflow-x:auto; margin-bottom:56px; }
@@ -202,9 +225,9 @@ footer a { color:var(--blaze); }
       <p class="marquee__sub">Standings for the crew on the Alloy office cabinet, pulled straight from the official Big Buck Hunter world leaderboard.</p>
     </div>
     <div class="marquee__stats">
-      <div class="mstat"><b>8</b><span>Hunters</span></div>
-      <div class="mstat"><b>14,057</b><span>Bucks taken</span></div>
-      <div class="mstat"><b>10.8M</b><span>Lifetime points</span></div>
+      <div class="mstat"><b data-confirmed="7" data-all="15">7</b><span>Hunters</span></div>
+      <div class="mstat"><b data-confirmed="13,898" data-all="18,514">13,898</b><span>Bucks taken</span></div>
+      <div class="mstat"><b data-confirmed="10.7M" data-all="14.2M">10.7M</b><span>Lifetime points</span></div>
     </div>
   </header>
 
@@ -224,7 +247,10 @@ footer a { color:var(--blaze); }
 
   <div class="sec-head">
     <h2>Standings</h2>
-    <span class="sec-note">Click any column to re-sort</span>
+    <span class="sec-actions">
+      <span class="sec-note">Click any column to re-sort</span>
+      <button type="button" id="toggle-unconfirmed" class="toggle" aria-pressed="false">Show unconfirmed (8)</button>
+    </span>
   </div>
   <div class="tablewrap">
     <table id="board">
@@ -241,7 +267,7 @@ footer a { color:var(--blaze); }
         </tr>
       </thead>
       <tbody>
-          <tr data-rank="1">
+          <tr class="" data-rank-all="1" data-rank-confirmed="1">
             <td class="c-rank"><span class="rank">1</span></td>
             <td class="c-name">
               <a class="pname" href="https://www.bigbuckhunter.com/profile/player/1002404" target="_blank" rel="noopener">Teddy Lord</a>
@@ -261,7 +287,7 @@ footer a { color:var(--blaze); }
             <td class="c-num"><span class="num">1,248</span></td>
             <td class="c-num"><span class="num">255</span></td>
           </tr>
-          <tr data-rank="2">
+          <tr class="" data-rank-all="2" data-rank-confirmed="2">
             <td class="c-rank"><span class="rank">2</span></td>
             <td class="c-name">
               <a class="pname" href="https://www.bigbuckhunter.com/profile/player/1000758" target="_blank" rel="noopener">Robert Zeigler</a>
@@ -281,12 +307,12 @@ footer a { color:var(--blaze); }
             <td class="c-num"><span class="num">977</span></td>
             <td class="c-num"><span class="num">295</span></td>
           </tr>
-          <tr data-rank="3">
-            <td class="c-rank"><span class="rank">3</span></td>
+          <tr class="unconfirmed" data-rank-all="3" data-rank-confirmed="">
+            <td class="c-rank"><span class="rank">—</span></td>
             <td class="c-name">
               <a class="pname" href="https://www.bigbuckhunter.com/profile/player/1024019" target="_blank" rel="noopener">Tom Csm</a>
               <span class="meta">Hunting since 1/27/26</span>
-              <span class="pills"><span class="pill pill--plain">Rookie</span></span>
+              <span class="pills"><span class="pill pill--plain">Rookie</span><span class="pill pill--note">Unconfirmed</span></span>
             </td>
             <td class="c-num">
               <span class="num">106,825</span>
@@ -301,8 +327,8 @@ footer a { color:var(--blaze); }
             <td class="c-num"><span class="num">23</span></td>
             <td class="c-num"><span class="num">717</span></td>
           </tr>
-          <tr data-rank="4">
-            <td class="c-rank"><span class="rank">4</span></td>
+          <tr class="" data-rank-all="4" data-rank-confirmed="3">
+            <td class="c-rank"><span class="rank">3</span></td>
             <td class="c-name">
               <a class="pname" href="https://www.bigbuckhunter.com/profile/player/1002516" target="_blank" rel="noopener">Charles Hearn</a>
               <span class="meta">Hunting since 4/11/25</span>
@@ -321,8 +347,8 @@ footer a { color:var(--blaze); }
             <td class="c-num"><span class="num">182</span></td>
             <td class="c-num"><span class="num">952</span></td>
           </tr>
-          <tr data-rank="5">
-            <td class="c-rank"><span class="rank">5</span></td>
+          <tr class="" data-rank-all="5" data-rank-confirmed="4">
+            <td class="c-rank"><span class="rank">4</span></td>
             <td class="c-name">
               <a class="pname" href="https://www.bigbuckhunter.com/profile/player/1000627" target="_blank" rel="noopener">Matt Khalil</a>
               <span class="meta">Hunting since 3/19/25</span>
@@ -341,8 +367,28 @@ footer a { color:var(--blaze); }
             <td class="c-num"><span class="num">1,282</span></td>
             <td class="c-num"><span class="num">1,066</span></td>
           </tr>
-          <tr data-rank="6">
-            <td class="c-rank"><span class="rank">6</span></td>
+          <tr class="unconfirmed" data-rank-all="6" data-rank-confirmed="">
+            <td class="c-rank"><span class="rank">—</span></td>
+            <td class="c-name">
+              <a class="pname" href="https://www.bigbuckhunter.com/profile/player/1009901" target="_blank" rel="noopener">Harley Lewis</a>
+              <span class="meta">Hunting since 7/15/25</span>
+              <span class="pills"><span class="pill pill--note">Unconfirmed</span></span>
+            </td>
+            <td class="c-num">
+              <span class="num">36,524</span>
+              <span class="bar"><i style="width:6.0%"></i></span>
+            </td>
+            <td class="c-num">
+              <span class="num">40.75%</span>
+              <span class="bar bar--acc"><i style="width:81.5%"></i></span>
+            </td>
+            <td class="c-num"><span class="num">745,297</span></td>
+            <td class="c-num"><span class="num">996</span></td>
+            <td class="c-num"><span class="num">226</span></td>
+            <td class="c-num"><span class="num">1,281</span></td>
+          </tr>
+          <tr class="" data-rank-all="7" data-rank-confirmed="5">
+            <td class="c-rank"><span class="rank">5</span></td>
             <td class="c-name">
               <a class="pname" href="https://www.bigbuckhunter.com/profile/player/1006483" target="_blank" rel="noopener">Kenz Brinkman</a>
               <span class="meta">Hunting since 6/3/25</span>
@@ -361,8 +407,28 @@ footer a { color:var(--blaze); }
             <td class="c-num"><span class="num">17</span></td>
             <td class="c-num"><span class="num">1,750</span></td>
           </tr>
-          <tr data-rank="7">
-            <td class="c-rank"><span class="rank">7</span></td>
+          <tr class="unconfirmed" data-rank-all="8" data-rank-confirmed="">
+            <td class="c-rank"><span class="rank">—</span></td>
+            <td class="c-name">
+              <a class="pname" href="https://www.bigbuckhunter.com/profile/player/1019047" target="_blank" rel="noopener">J Q</a>
+              <span class="meta">Hunting since 11/8/25</span>
+              <span class="pills"><span class="pill pill--note">Unconfirmed</span></span>
+            </td>
+            <td class="c-num">
+              <span class="num">18,058</span>
+              <span class="bar"><i style="width:3.0%"></i></span>
+            </td>
+            <td class="c-num">
+              <span class="num">25%</span>
+              <span class="bar bar--acc"><i style="width:50.0%"></i></span>
+            </td>
+            <td class="c-num"><span class="num">18,058</span></td>
+            <td class="c-num"><span class="num">27</span></td>
+            <td class="c-num"><span class="num">4</span></td>
+            <td class="c-num"><span class="num">2,144</span></td>
+          </tr>
+          <tr class="" data-rank-all="9" data-rank-confirmed="6">
+            <td class="c-rank"><span class="rank">6</span></td>
             <td class="c-name">
               <a class="pname" href="https://www.bigbuckhunter.com/profile/player/1037633" target="_blank" rel="noopener">Josh Kostal</a>
               <span class="meta">Hunting since 9/3/26</span>
@@ -381,8 +447,48 @@ footer a { color:var(--blaze); }
             <td class="c-num"><span class="num">5</span></td>
             <td class="c-num"><span class="num">2,928</span></td>
           </tr>
-          <tr data-rank="8">
-            <td class="c-rank"><span class="rank">8</span></td>
+          <tr class="unconfirmed" data-rank-all="10" data-rank-confirmed="">
+            <td class="c-rank"><span class="rank">—</span></td>
+            <td class="c-name">
+              <a class="pname" href="https://www.bigbuckhunter.com/profile/player/2269" target="_blank" rel="noopener">Black Tiger</a>
+              <span class="meta">Hunting since 2/4/06</span>
+              <span class="pills"><span class="pill pill--note">Legacy account · 2006</span><span class="pill pill--note">Unconfirmed</span></span>
+            </td>
+            <td class="c-num">
+              <span class="num">10,360</span>
+              <span class="bar"><i style="width:2.5%"></i></span>
+            </td>
+            <td class="c-num">
+              <span class="num">18.5%</span>
+              <span class="bar bar--acc"><i style="width:37.0%"></i></span>
+            </td>
+            <td class="c-num"><span class="num">324,317</span></td>
+            <td class="c-num"><span class="num">414</span></td>
+            <td class="c-num"><span class="num">41</span></td>
+            <td class="c-num"><span class="num">3,105</span></td>
+          </tr>
+          <tr class="unconfirmed" data-rank-all="11" data-rank-confirmed="">
+            <td class="c-rank"><span class="rank">—</span></td>
+            <td class="c-name">
+              <a class="pname" href="https://www.bigbuckhunter.com/profile/player/1376" target="_blank" rel="noopener">IZ IZ</a>
+              <span class="meta">Hunting since 1/1/06</span>
+              <span class="pills"><span class="pill pill--plain">1M Club</span><span class="pill pill--plain">Marksman ×1</span><span class="pill pill--note">Legacy account · 2006</span><span class="pill pill--note">Unconfirmed</span></span>
+            </td>
+            <td class="c-num">
+              <span class="num">9,291</span>
+              <span class="bar"><i style="width:2.5%"></i></span>
+            </td>
+            <td class="c-num">
+              <span class="num">17.5%</span>
+              <span class="bar bar--acc"><i style="width:35.0%"></i></span>
+            </td>
+            <td class="c-num"><span class="num">1,140,396</span></td>
+            <td class="c-num"><span class="num">1,482</span></td>
+            <td class="c-num"><span class="num">157</span></td>
+            <td class="c-num"><span class="num">3,313</span></td>
+          </tr>
+          <tr class="" data-rank-all="12" data-rank-confirmed="7">
+            <td class="c-rank"><span class="rank">7</span></td>
             <td class="c-name">
               <a class="pname" href="https://www.bigbuckhunter.com/profile/player/1019349" target="_blank" rel="noopener">Paige Johnston</a>
               <span class="meta">Hunting since 11/14/25</span>
@@ -401,13 +507,75 @@ footer a { color:var(--blaze); }
             <td class="c-num"><span class="num">0</span></td>
             <td class="c-num"><span class="num">3,325</span></td>
           </tr>
+          <tr class="unconfirmed" data-rank-all="13" data-rank-confirmed="">
+            <td class="c-rank"><span class="rank">—</span></td>
+            <td class="c-name">
+              <a class="pname" href="https://www.bigbuckhunter.com/profile/player/1997" target="_blank" rel="noopener">ELDON HANSEN</a>
+              <span class="meta">Hunting since 9/27/07</span>
+              <span class="pills"><span class="pill pill--plain">1M Club</span><span class="pill pill--plain">Marksman ×1</span><span class="pill pill--note">Legacy account · 2007</span><span class="pill pill--note">Unconfirmed</span></span>
+            </td>
+            <td class="c-num">
+              <span class="num">7,843</span>
+              <span class="bar"><i style="width:2.5%"></i></span>
+            </td>
+            <td class="c-num">
+              <span class="num">35%</span>
+              <span class="bar bar--acc"><i style="width:70.0%"></i></span>
+            </td>
+            <td class="c-num"><span class="num">1,157,856</span></td>
+            <td class="c-num"><span class="num">1,519</span></td>
+            <td class="c-num"><span class="num">204</span></td>
+            <td class="c-num"><span class="num">3,731</span></td>
+          </tr>
+          <tr class="unconfirmed" data-rank-all="14" data-rank-confirmed="">
+            <td class="c-rank"><span class="rank">—</span></td>
+            <td class="c-name">
+              <a class="pname" href="https://www.bigbuckhunter.com/profile/player/1037634" target="_blank" rel="noopener">Irwun Po</a>
+              <span class="meta">Hunting since 9/3/26</span>
+              <span class="pills"><span class="pill pill--plain">Rookie</span><span class="pill pill--note">Unconfirmed</span></span>
+            </td>
+            <td class="c-num">
+              <span class="num">7,428</span>
+              <span class="bar"><i style="width:2.5%"></i></span>
+            </td>
+            <td class="c-num">
+              <span class="num">25%</span>
+              <span class="bar bar--acc"><i style="width:50.0%"></i></span>
+            </td>
+            <td class="c-num"><span class="num">7,428</span></td>
+            <td class="c-num"><span class="num">9</span></td>
+            <td class="c-num"><span class="num">1</span></td>
+            <td class="c-num"><span class="num">3,876</span></td>
+          </tr>
+          <tr class="unconfirmed" data-rank-all="15" data-rank-confirmed="">
+            <td class="c-rank"><span class="rank">—</span></td>
+            <td class="c-name">
+              <a class="pname" href="https://www.bigbuckhunter.com/profile/player/1029663" target="_blank" rel="noopener">Pidge Jownston</a>
+              <span class="meta">Hunting since 5/1/26</span>
+              <span class="pills"><span class="pill pill--plain">Rookie</span><span class="pill pill--note">Unconfirmed</span></span>
+            </td>
+            <td class="c-num">
+              <span class="num">6,703</span>
+              <span class="bar"><i style="width:2.5%"></i></span>
+            </td>
+            <td class="c-num">
+              <span class="num">18%</span>
+              <span class="bar bar--acc"><i style="width:36.0%"></i></span>
+            </td>
+            <td class="c-num"><span class="num">6,703</span></td>
+            <td class="c-num"><span class="num">10</span></td>
+            <td class="c-num"><span class="num">2</span></td>
+            <td class="c-num"><span class="num">4,215</span></td>
+          </tr>
       </tbody>
     </table>
   </div>
 
+  <p class="uc-note">Unconfirmed hunters are accounts the Big Buck Hunter network assigns to this cabinet that nobody here recognized &mdash; visitors, one-offs, or accounts older than the machine. Ranks and totals above include them while this view is on; house records below always reflect the confirmed crew.</p>
+
   <div class="sec-head">
     <h2>House records</h2>
-    <span class="sec-note">All time, all hunters</span>
+    <span class="sec-note">All time, confirmed crew</span>
   </div>
   <div class="records">
         <div class="rec">
@@ -444,7 +612,7 @@ footer a { color:var(--blaze); }
   </div>
 
   <footer>
-    <span class="footnote">Showing 8 of 15 hunters the network assigns to this cabinet; 7 unrecognized accounts hidden. A player&rsquo;s venue on the Big Buck Hunter network is their <em>current</em> home location, not where they first registered &mdash; so accounts older than Alloy itself (founded 2015) can drift onto this cabinet once they play here.</span>
+    <span class="footnote">Showing 7 of 15 hunters the network assigns to this cabinet; 8 unrecognized accounts hidden. A player&rsquo;s venue on the Big Buck Hunter network is their <em>current</em> home location, not where they first registered &mdash; so accounts older than Alloy itself (founded 2015) can drift onto this cabinet once they play here.</span>
     <span>Data: bigbuckhunter.com world qualifier leaderboard + public player profiles</span>
     <span>Fetched Sep 4, 2026 at 8:33 PM UTC · <a href="https://www.bigbuckhunter.com/world/qualifiers?search=Alloy" target="_blank" rel="noopener">Source</a></span>
   </footer>
@@ -462,6 +630,24 @@ footer a { color:var(--blaze); }
     var raw = (cell.querySelector('.num, .rank') || cell).textContent.replace(/[^0-9.]/g, '');
     return raw === '' ? -1 : parseFloat(raw);
   }
+  var btn = document.getElementById('toggle-unconfirmed');
+  if (btn) {
+    var hiddenCount = document.querySelectorAll('tr.unconfirmed').length;
+    btn.addEventListener('click', function () {
+      var on = document.body.classList.toggle('show-unconfirmed');
+      btn.setAttribute('aria-pressed', String(on));
+      btn.textContent = on ? 'Hide unconfirmed' : 'Show unconfirmed (' + hiddenCount + ')';
+      // The board ranks whoever is on screen, so the numbers change with it.
+      rows.forEach(function (r) {
+        r.querySelector('.rank').textContent =
+          on ? r.dataset.rankAll : (r.dataset.rankConfirmed || '—');
+      });
+      document.querySelectorAll('[data-all]').forEach(function (el) {
+        el.textContent = on ? el.dataset.all : el.dataset.confirmed;
+      });
+    });
+  }
+
   table.tHead.addEventListener('click', function (e) {
     var th = e.target.closest('th');
     if (!th) return;

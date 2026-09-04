@@ -55,9 +55,12 @@ allowlist. Flip a `show` flag and rebuild:
 "1009901": { "name": "Harley Lewis", "show": false }
 ```
 
-Hidden hunters stay in `data/standings.json` but drop out of the ranks, header totals, and
-house records. New hunters arrive **hidden** — `build.py` prints them so you can flip the
-ones you recognize.
+Hidden hunters drop out of the ranks, header totals, and house records — but they are still
+rendered into the page, collapsed behind a **Show unconfirmed** toggle in the standings header.
+Flipping it on renumbers the board over everyone and swaps the header totals to match; house
+records always stay confirmed-only.
+
+New hunters arrive **hidden** — `build.py` prints them so you can flip the ones you recognize.
 
 ## Where the data comes from
 

@@ -98,6 +98,29 @@ h2 {
 .sec-note {
   font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.06em; color:var(--muted);
 }
+.sec-actions { display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+.toggle {
+  font-family:"IBM Plex Mono",monospace; font-size:10px; font-weight:600;
+  letter-spacing:.13em; text-transform:uppercase; padding:6px 11px;
+  background:transparent; color:var(--muted); border:1px solid var(--line-strong);
+  cursor:pointer; transition:color .12s, border-color .12s, background .12s;
+}
+.toggle:hover { color:var(--blaze); border-color:var(--blaze); }
+.toggle[aria-pressed="true"] {
+  background:var(--blaze); border-color:var(--blaze); color:var(--surface);
+}
+.caveat { color:var(--brass); font-style:italic; }
+
+/* Unconfirmed rows ship in the markup but stay collapsed until asked for. */
+tbody tr.unconfirmed { display:none; }
+body.show-unconfirmed tbody tr.unconfirmed { display:table-row; }
+tr.unconfirmed .pname, tr.unconfirmed .num, tr.unconfirmed .rank { color:var(--muted); }
+tr.unconfirmed .bar i { background:var(--line-strong); }
+.uc-note {
+  display:none; font-size:.86rem; color:var(--muted); max-width:74ch;
+  margin:-34px 0 46px; line-height:1.6;
+}
+body.show-unconfirmed .uc-note { display:block; }
 
 /* ---- table ---- */
 .tablewrap { overflow-x:auto; margin-bottom:56px; }
