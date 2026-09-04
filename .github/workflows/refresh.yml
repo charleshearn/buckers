@@ -1,0 +1,59 @@
+name: Refresh the Buck Board
+
+on:
+  schedule:
+    - cron: "20 11 * * *"     # 11:20 UTC daily (~7:20am ET). UTC only — no DST shift.
+  workflow_dispatch:           # lets you run it by hand from the Actions tab
+
+permissions:
+  contents: write              # commit refreshed data back to the repo
+  pages: write                 # publish to GitHub Pages
+  id-token: write
+
+concurrency:
+  group: buckboard
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # fetch.py exits non-zero and leaves data/standings.json untouched if the
+      # upstream call fails, so a bad day republishes the last good board rather
+      # than a blank one.
+      - name: Fetch standings
+        id: fetch
+        continue-on-error: true
+        run: python3 scripts/fetch.py
+
+      - name: Build site
+        run: python3 scripts/build.py
+
+      - name: Commit refreshed data
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/standings.json roster.json public artifact.html
+          git diff --staged --quiet || git commit -m "Daily refresh: $(date -u +%Y-%m-%d) [skip ci]"
+          git push
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+      - id: deploy
+        uses: actions/deploy-pages@v4
+
+      - name: Flag a failed fetch
+        if: steps.fetch.outcome == 'failure'
+        run: |
+          echo "::warning::Fetch failed — republished the previous data. See the Fetch step log."

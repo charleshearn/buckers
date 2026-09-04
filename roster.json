@@ -1,0 +1,65 @@
+{
+  "_comment": "Allowlist for the board. Set \"show\": false to hide a hunter \u2014 they stay in data/standings.json but drop out of the ranks, totals, and house records. New hunters arrive hidden \u2014 flip them to true once you recognize them.",
+  "hunters": {
+    "2269": {
+      "name": "Black Tiger",
+      "show": false
+    },
+    "1002516": {
+      "name": "Charles Hearn",
+      "show": true
+    },
+    "1997": {
+      "name": "ELDON HANSEN",
+      "show": false
+    },
+    "1009901": {
+      "name": "Harley Lewis",
+      "show": false
+    },
+    "1037634": {
+      "name": "Irwun Po",
+      "show": false
+    },
+    "1376": {
+      "name": "IZ IZ",
+      "show": false
+    },
+    "1019047": {
+      "name": "J Q",
+      "show": false
+    },
+    "1037633": {
+      "name": "Josh Kostal",
+      "show": true
+    },
+    "1006483": {
+      "name": "Kenz Brinkman",
+      "show": true
+    },
+    "1000627": {
+      "name": "Matt Khalil",
+      "show": true
+    },
+    "1019349": {
+      "name": "Paige Johnston",
+      "show": true
+    },
+    "1029663": {
+      "name": "Pidge Jownston",
+      "show": false
+    },
+    "1000758": {
+      "name": "Robert Zeigler",
+      "show": true
+    },
+    "1002404": {
+      "name": "Teddy Lord",
+      "show": true
+    },
+    "1024019": {
+      "name": "Tom Csm",
+      "show": true
+    }
+  }
+}
