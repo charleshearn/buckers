@@ -169,7 +169,16 @@ recs = "".join(f'''        <div class="rec">
           <span class="rec__note">{html.escape(note)}</span>
         </div>''' for l, w, v, note in records)
 
-HTML = f'''<title>The Alloy Buck Board</title>
+HTML = f'''<script>
+// Read the mode before anything paints: ?tv for the wall display, &all to
+// include unconfirmed hunters on it.
+(function (p) {{
+  if (!/(^|[?&])tv(=|&|$)/.test(p)) return;
+  document.documentElement.classList.add('tv');
+  if (/(^|[?&])all(=|&|$)/.test(p)) document.documentElement.classList.add('tv-all');
+}})(location.search);
+</script>
+<title>The Alloy Buck Board</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -380,6 +389,66 @@ footer a {{ color:var(--blaze); }}
 .footnote {{ flex:1 1 100%; max-width:70ch; line-height:1.6; margin-bottom:6px; }}
 .footnote em {{ color:var(--ink-2); font-style:italic; }}
 
+/* ---- TV mode: ?tv --------------------------------------------------------
+   One screen, no scrolling, no pointer. Type scales off viewport height so the
+   same board reads correctly on a 1080p panel and a 4K one. */
+html.tv, html.tv body {{ height:100%; overflow:hidden; cursor:none; }}
+html.tv body {{ font-size:clamp(13px,1.75vh,40px); }}
+html.tv .wrap {{
+  max-width:none; height:100vh; padding:3.2vh 2.6vw;   /* room for TV overscan */
+  display:flex; flex-direction:column; gap:0;
+}}
+html.tv .marquee {{ padding:0 0 1.6vh; margin-bottom:2vh; flex:0 0 auto; }}
+html.tv h1 {{ font-size:clamp(26px,6.6vh,132px); }}
+html.tv .eyebrow {{ font-size:clamp(9px,1.35vh,29px); margin-bottom:.8vh; }}
+html.tv .marquee__sub {{ display:none; }}            /* nobody reads a paragraph on a wall */
+html.tv .mstat b {{ font-size:clamp(16px,3.4vh,78px); }}
+html.tv .mstat span {{ font-size:clamp(8px,1.2vh,25px); }}
+
+html.tv .champ {{ margin-bottom:2vh; flex:0 0 auto; }}
+html.tv .champ__main {{ padding:1.8vh 1.8vw; }}
+html.tv .champ__name {{ font-size:clamp(20px,4.6vh,104px); }}
+html.tv .champ__line {{ font-size:clamp(11px,1.7vh,38px); }}
+html.tv .cg {{ padding:1.2vh 1.4vw; }}
+html.tv .cg b {{ font-size:clamp(15px,3vh,66px); }}
+html.tv .cg span {{ font-size:clamp(8px,1.2vh,25px); }}
+
+html.tv .sec-head {{ padding-bottom:.8vh; flex:0 0 auto; }}
+html.tv h2 {{ font-size:clamp(15px,3vh,64px); }}
+html.tv .sec-actions {{ display:none; }}             /* no pointer to click with */
+
+/* The table absorbs whatever height is left, so rows spread evenly whether
+   there are 7 of them or 15. */
+html.tv .tablewrap {{ flex:1 1 auto; overflow:hidden; margin-bottom:0; }}
+html.tv table {{ height:100%; min-width:0; }}
+html.tv thead th {{ font-size:clamp(8px,1.2vh,25px); padding:.9vh .7vw; cursor:default; }}
+html.tv tbody td {{ padding:.5vh .7vw; }}
+html.tv .rank {{ font-size:clamp(14px,2.6vh,58px); }}
+html.tv .pname {{ font-size:clamp(13px,2.4vh,55px); border-bottom:0; }}
+html.tv .num {{ font-size:clamp(12px,2.2vh,50px); }}
+html.tv .meta, html.tv .pills {{ display:none; }}    /* detail that won't read at 10 feet */
+html.tv .bar {{ height:.5vh; margin-top:.5vh; min-width:5vw; }}
+/* Drop the three columns a passer-by won't parse: lifetime, bucks, perfect sites. */
+html.tv thead th:nth-child(n+5):nth-child(-n+7),
+html.tv tbody td:nth-child(n+5):nth-child(-n+7) {{ display:none; }}
+
+html.tv .uc-note, html.tv .records, html.tv .footnote {{ display:none; }}
+html.tv .sec-head--records {{ display:none; }}
+html.tv footer {{
+  margin-top:1.4vh; padding-top:1vh; flex:0 0 auto;
+  font-size:clamp(8px,1.2vh,24px); justify-content:flex-end;
+}}
+html.tv .src {{ display:none; }}
+html.tv.tv-all tbody tr.unconfirmed {{ display:table-row; }}
+/* Twice the rows have to fit the same screen: the champion panel gives way to
+   the roster, and the rows tighten. */
+html.tv.tv-all .champ {{ display:none; }}
+html.tv.tv-all .rank {{ font-size:clamp(12px,2.2vh,48px); }}
+html.tv.tv-all .pname {{ font-size:clamp(11px,2.05vh,46px); }}
+html.tv.tv-all .num {{ font-size:clamp(10px,1.9vh,42px); }}
+html.tv.tv-all tbody td {{ padding:.35vh .7vw; }}
+html.tv.tv-all .bar {{ height:.4vh; margin-top:.35vh; }}
+
 @media (max-width:900px) {{ .records {{ grid-template-columns:repeat(2,1fr); }} }}
 @media (max-width:760px) {{
   .records {{ grid-template-columns:1fr; }}
@@ -445,7 +514,7 @@ footer a {{ color:var(--blaze); }}
 
   <p class="uc-note">Unconfirmed hunters are accounts the Big Buck Hunter network assigns to this cabinet that nobody here recognized &mdash; visitors, one-offs, or accounts older than the machine. Ranks and totals above include them while this view is on; house records below always reflect the confirmed crew.</p>
 
-  <div class="sec-head">
+  <div class="sec-head sec-head--records">
     <h2>House records</h2>
     <span class="sec-note">All time, confirmed crew</span>
   </div>
@@ -455,7 +524,7 @@ footer a {{ color:var(--blaze); }}
 
   <footer>
     <span class="footnote">{hidden_note}A player&rsquo;s venue on the Big Buck Hunter network is their <em>current</em> home location, not where they first registered &mdash; so accounts older than Alloy itself (founded 2015) can drift onto this cabinet once they play here.</span>
-    <span>Data: bigbuckhunter.com world qualifier leaderboard + public player profiles</span>
+    <span class="src">Data: bigbuckhunter.com world qualifier leaderboard + public player profiles</span>
     <span>Fetched {fetched} · <a href="https://www.bigbuckhunter.com/world/qualifiers?search=Alloy" target="_blank" rel="noopener">Source</a></span>
   </footer>
 </div>
@@ -472,6 +541,24 @@ footer a {{ color:var(--blaze); }}
     var raw = (cell.querySelector('.num, .rank') || cell).textContent.replace(/[^0-9.]/g, '');
     return raw === '' ? -1 : parseFloat(raw);
   }}
+  // Ranks and header totals describe whoever is on screen.
+  function applyMode(on) {{
+    rows.forEach(function (r) {{
+      r.querySelector('.rank').textContent =
+        on ? r.dataset.rankAll : (r.dataset.rankConfirmed || '—');
+    }});
+    document.querySelectorAll('[data-all]').forEach(function (el) {{
+      el.textContent = on ? el.dataset.all : el.dataset.confirmed;
+    }});
+  }}
+
+  var root = document.documentElement;
+  if (root.classList.contains('tv')) {{
+    if (root.classList.contains('tv-all')) applyMode(true);
+    // Nobody is going to walk over and refresh the TV.
+    setTimeout(function () {{ location.reload(); }}, 15 * 60 * 1000);
+  }}
+
   var btn = document.getElementById('toggle-unconfirmed');
   if (btn) {{
     var hiddenCount = document.querySelectorAll('tr.unconfirmed').length;
@@ -479,14 +566,7 @@ footer a {{ color:var(--blaze); }}
       var on = document.body.classList.toggle('show-unconfirmed');
       btn.setAttribute('aria-pressed', String(on));
       btn.textContent = on ? 'Hide unconfirmed' : 'Show unconfirmed (' + hiddenCount + ')';
-      // The board ranks whoever is on screen, so the numbers change with it.
-      rows.forEach(function (r) {{
-        r.querySelector('.rank').textContent =
-          on ? r.dataset.rankAll : (r.dataset.rankConfirmed || '—');
-      }});
-      document.querySelectorAll('[data-all]').forEach(function (el) {{
-        el.textContent = on ? el.dataset.all : el.dataset.confirmed;
-      }});
+      applyMode(on);
     }});
   }}
 
@@ -516,9 +596,11 @@ footer a {{ color:var(--blaze); }}
 import hashlib, shutil
 
 css = HTML[HTML.index("<style>") + len("<style>"):HTML.index("</style>")].strip()
-js = HTML[HTML.index("<script>") + len("<script>"):HTML.index("</script>")].strip()
+# rindex: the head carries an inline mode-detection script, so the trailing
+# <script> block is the last one, not the first.
+js = HTML[HTML.rindex("<script>") + len("<script>"):HTML.rindex("</script>")].strip()
 head = HTML[:HTML.index("<style>")].strip()
-body = HTML[HTML.index("</style>") + len("</style>"):HTML.index("<script>")].strip()
+body = HTML[HTML.index("</style>") + len("</style>"):HTML.rindex("<script>")].strip()
 
 (ROOT / "artifact.html").write_text(HTML)
 

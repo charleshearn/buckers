@@ -19,6 +19,23 @@ python3 scripts/fetch.py    # re-pull data/standings.json from bigbuckhunter.com
 python3 scripts/build.py    # re-render public/ + artifact.html
 ```
 
+## TV mode
+
+Add `?tv` to the URL for a wall display:
+
+| URL | Shows |
+|---|---|
+| `https://hearn.ch/buckers/?tv` | The confirmed crew — champion panel + standings |
+| `https://hearn.ch/buckers/?tv&all` | Every hunter on the cabinet, champion panel dropped to make room |
+
+It's one screen with no scrolling, sized off viewport height so the same board reads correctly
+on 1366×768 through 4K. The sort hint, the unconfirmed toggle, and the mouse cursor are hidden
+(nothing to click with on a TV), the lifetime/bucks/perfect-sites columns drop to leave rank,
+hunter, season points, accuracy and world rank, and the page **reloads itself every 15 minutes**
+so a new deploy appears without anyone touching the TV.
+
+Verified with no clipping at 1366×768, 1920×1080, 2560×1440 and 3840×2160, in both modes.
+
 ## Hosting
 
 The data cannot refresh from the browser — `bigbuckhunter.com` sends no CORS headers, so

@@ -3,12 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="robots" content="noindex, nofollow">
+<script>
+// Read the mode before anything paints: ?tv for the wall display, &all to
+// include unconfirmed hunters on it.
+(function (p) {
+  if (!/(^|[?&])tv(=|&|$)/.test(p)) return;
+  document.documentElement.classList.add('tv');
+  if (/(^|[?&])all(=|&|$)/.test(p)) document.documentElement.classList.add('tv-all');
+})(location.search);
+</script>
 <title>The Alloy Buck Board</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ultra&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="assets/styles.css?v=71a68c9d">
+<link rel="stylesheet" href="assets/styles.css?v=693faa06">
 </head>
 <body>
 <div class="wrap">
@@ -367,7 +376,7 @@
 
   <p class="uc-note">Unconfirmed hunters are accounts the Big Buck Hunter network assigns to this cabinet that nobody here recognized &mdash; visitors, one-offs, or accounts older than the machine. Ranks and totals above include them while this view is on; house records below always reflect the confirmed crew.</p>
 
-  <div class="sec-head">
+  <div class="sec-head sec-head--records">
     <h2>House records</h2>
     <span class="sec-note">All time, confirmed crew</span>
   </div>
@@ -407,10 +416,10 @@
 
   <footer>
     <span class="footnote">Showing 7 of 15 hunters the network assigns to this cabinet; 8 unrecognized accounts hidden. A player&rsquo;s venue on the Big Buck Hunter network is their <em>current</em> home location, not where they first registered &mdash; so accounts older than Alloy itself (founded 2015) can drift onto this cabinet once they play here.</span>
-    <span>Data: bigbuckhunter.com world qualifier leaderboard + public player profiles</span>
+    <span class="src">Data: bigbuckhunter.com world qualifier leaderboard + public player profiles</span>
     <span>Fetched Sep 4, 2026 at 8:55 PM UTC · <a href="https://www.bigbuckhunter.com/world/qualifiers?search=Alloy" target="_blank" rel="noopener">Source</a></span>
   </footer>
 </div>
-<script src="assets/board.js?v=4fa0aecc"></script>
+<script src="assets/board.js?v=33f1d360"></script>
 </body>
 </html>
