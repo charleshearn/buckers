@@ -2,7 +2,7 @@
   "location": "Alloy",
   "city": "New York",
   "state": "NY",
-  "fetched_at": "2026-09-04T20:53:19+00:00",
+  "fetched_at": "2026-09-04T20:55:29+00:00",
   "source": "https://www.bigbuckhunter.com/world/qualifiers",
   "players": [
     {
@@ -14,10 +14,10 @@
       "location": "Alloy",
       "city": "New York",
       "state": "NY",
-      "season_score": 603894,
-      "accuracy": 41.65,
-      "season_rank": 255,
-      "wildcard_rank": 242,
+      "season_score": 613531,
+      "accuracy": 41.43,
+      "season_rank": 254,
+      "wildcard_rank": 235,
       "lifetime": {
         "cumulative_score": 3476204,
         "bucks_killed": 4259,
@@ -29,7 +29,7 @@
         "marksman_awards": 10,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 255,
+        "global_rank": 254,
         "global_player_count": 11418,
         "hunting_since": "4/9/25"
       }
@@ -48,7 +48,7 @@
       "season_rank": 295,
       "wildcard_rank": 255,
       "lifetime": {
-        "cumulative_score": 2919580,
+        "cumulative_score": 2921140,
         "bucks_killed": 3881,
         "critters_killed": 1862,
         "dangerous_trophies": 123,
@@ -58,7 +58,7 @@
         "marksman_awards": 7,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 295,
+        "global_rank": 290,
         "global_player_count": 11418,
         "hunting_since": "3/21/25"
       }
@@ -106,12 +106,12 @@
       "season_rank": 952,
       "wildcard_rank": 898,
       "lifetime": {
-        "cumulative_score": 538335,
+        "cumulative_score": 540335,
         "bucks_killed": 741,
         "critters_killed": 221,
         "dangerous_trophies": 27,
         "perfect_sites": 185,
-        "double_perfect_bonus": 3,
+        "double_perfect_bonus": 4,
         "longest_perfect_streak": 5,
         "marksman_awards": 0,
         "showdown_wins": 0,
