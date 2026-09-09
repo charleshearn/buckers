@@ -2,7 +2,7 @@
   "location": "Alloy",
   "city": "New York",
   "state": "NY",
-  "fetched_at": "2026-09-08T15:08:29+00:00",
+  "fetched_at": "2026-09-09T15:08:31+00:00",
   "source": "https://www.bigbuckhunter.com/world/qualifiers",
   "players": [
     {
@@ -19,18 +19,18 @@
       "season_rank": 248,
       "wildcard_rank": 222,
       "lifetime": {
-        "cumulative_score": 3522847,
-        "bucks_killed": 4323,
-        "critters_killed": 1469,
-        "dangerous_trophies": 197,
-        "perfect_sites": 1268,
-        "double_perfect_bonus": 128,
+        "cumulative_score": 3554737,
+        "bucks_killed": 4363,
+        "critters_killed": 1477,
+        "dangerous_trophies": 200,
+        "perfect_sites": 1280,
+        "double_perfect_bonus": 130,
         "longest_perfect_streak": 5,
-        "marksman_awards": 10,
+        "marksman_awards": 11,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 21,
-        "global_player_count": 21,
+        "global_rank": 26,
+        "global_player_count": 87,
         "hunting_since": "4/9/25"
       }
     },
@@ -58,8 +58,8 @@
         "marksman_awards": 7,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 21,
-        "global_player_count": 21,
+        "global_rank": 87,
+        "global_player_count": 87,
         "hunting_since": "3/21/25"
       }
     },
@@ -87,8 +87,8 @@
         "marksman_awards": 0,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 21,
-        "global_player_count": 21,
+        "global_rank": 87,
+        "global_player_count": 87,
         "hunting_since": "1/27/26"
       }
     },
@@ -106,18 +106,18 @@
       "season_rank": 772,
       "wildcard_rank": 730,
       "lifetime": {
-        "cumulative_score": 556850,
-        "bucks_killed": 766,
-        "critters_killed": 225,
-        "dangerous_trophies": 27,
-        "perfect_sites": 191,
+        "cumulative_score": 574566,
+        "bucks_killed": 790,
+        "critters_killed": 232,
+        "dangerous_trophies": 28,
+        "perfect_sites": 196,
         "double_perfect_bonus": 4,
         "longest_perfect_streak": 5,
         "marksman_awards": 0,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 21,
-        "global_player_count": 21,
+        "global_rank": 50,
+        "global_player_count": 87,
         "hunting_since": "4/11/25"
       }
     },
@@ -145,8 +145,8 @@
         "marksman_awards": 2,
         "showdown_wins": 0,
         "showdown_losses": 1,
-        "global_rank": 21,
-        "global_player_count": 21,
+        "global_rank": 87,
+        "global_player_count": 87,
         "hunting_since": "3/19/25"
       }
     },
@@ -174,8 +174,8 @@
         "marksman_awards": 0,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 21,
-        "global_player_count": 21,
+        "global_rank": 87,
+        "global_player_count": 87,
         "hunting_since": "7/15/25"
       }
     },
@@ -203,8 +203,8 @@
         "marksman_awards": 0,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 21,
-        "global_player_count": 21,
+        "global_rank": 87,
+        "global_player_count": 87,
         "hunting_since": "6/3/25"
       }
     },
@@ -232,8 +232,8 @@
         "marksman_awards": 0,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 21,
-        "global_player_count": 21,
+        "global_rank": 87,
+        "global_player_count": 87,
         "hunting_since": "11/8/25"
       }
     },
@@ -251,18 +251,18 @@
       "season_rank": 2964,
       "wildcard_rank": 2902,
       "lifetime": {
-        "cumulative_score": 13070,
-        "bucks_killed": 17,
-        "critters_killed": 6,
+        "cumulative_score": 30353,
+        "bucks_killed": 38,
+        "critters_killed": 21,
         "dangerous_trophies": 1,
-        "perfect_sites": 5,
+        "perfect_sites": 11,
         "double_perfect_bonus": 0,
-        "longest_perfect_streak": 3,
+        "longest_perfect_streak": 5,
         "marksman_awards": 0,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 21,
-        "global_player_count": 21,
+        "global_rank": 52,
+        "global_player_count": 87,
         "hunting_since": "9/3/26"
       }
     },
@@ -290,8 +290,8 @@
         "marksman_awards": 0,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 21,
-        "global_player_count": 21,
+        "global_rank": 87,
+        "global_player_count": 87,
         "hunting_since": "2/4/06"
       }
     },
@@ -319,8 +319,8 @@
         "marksman_awards": 1,
         "showdown_wins": 0,
         "showdown_losses": 3,
-        "global_rank": 21,
-        "global_player_count": 21,
+        "global_rank": 87,
+        "global_player_count": 87,
         "hunting_since": "1/1/06"
       }
     },
@@ -348,8 +348,8 @@
         "marksman_awards": 0,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 21,
-        "global_player_count": 21,
+        "global_rank": 87,
+        "global_player_count": 87,
         "hunting_since": "11/14/25"
       }
     },
@@ -377,8 +377,8 @@
         "marksman_awards": 1,
         "showdown_wins": 1,
         "showdown_losses": 4,
-        "global_rank": 21,
-        "global_player_count": 21,
+        "global_rank": 87,
+        "global_player_count": 87,
         "hunting_since": "9/27/07"
       }
     },
@@ -406,8 +406,8 @@
         "marksman_awards": 0,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 21,
-        "global_player_count": 21,
+        "global_rank": 87,
+        "global_player_count": 87,
         "hunting_since": "9/3/26"
       }
     },
@@ -435,8 +435,8 @@
         "marksman_awards": 0,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 21,
-        "global_player_count": 21,
+        "global_rank": 87,
+        "global_player_count": 87,
         "hunting_since": "5/1/26"
       }
     }
