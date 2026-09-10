@@ -2,7 +2,7 @@
   "location": "Alloy",
   "city": "New York",
   "state": "NY",
-  "fetched_at": "2026-09-09T15:08:31+00:00",
+  "fetched_at": "2026-09-10T15:00:31+00:00",
   "source": "https://www.bigbuckhunter.com/world/qualifiers",
   "players": [
     {
@@ -29,8 +29,8 @@
         "marksman_awards": 11,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 26,
-        "global_player_count": 87,
+        "global_rank": 42,
+        "global_player_count": 136,
         "hunting_since": "4/9/25"
       }
     },
@@ -58,8 +58,8 @@
         "marksman_awards": 7,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 87,
-        "global_player_count": 87,
+        "global_rank": 136,
+        "global_player_count": 136,
         "hunting_since": "3/21/25"
       }
     },
@@ -87,8 +87,8 @@
         "marksman_awards": 0,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 87,
-        "global_player_count": 87,
+        "global_rank": 136,
+        "global_player_count": 136,
         "hunting_since": "1/27/26"
       }
     },
@@ -116,8 +116,8 @@
         "marksman_awards": 0,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 50,
-        "global_player_count": 87,
+        "global_rank": 76,
+        "global_player_count": 136,
         "hunting_since": "4/11/25"
       }
     },
@@ -145,8 +145,8 @@
         "marksman_awards": 2,
         "showdown_wins": 0,
         "showdown_losses": 1,
-        "global_rank": 87,
-        "global_player_count": 87,
+        "global_rank": 136,
+        "global_player_count": 136,
         "hunting_since": "3/19/25"
       }
     },
@@ -174,8 +174,8 @@
         "marksman_awards": 0,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 87,
-        "global_player_count": 87,
+        "global_rank": 136,
+        "global_player_count": 136,
         "hunting_since": "7/15/25"
       }
     },
@@ -203,8 +203,8 @@
         "marksman_awards": 0,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 87,
-        "global_player_count": 87,
+        "global_rank": 136,
+        "global_player_count": 136,
         "hunting_since": "6/3/25"
       }
     },
@@ -232,8 +232,8 @@
         "marksman_awards": 0,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 87,
-        "global_player_count": 87,
+        "global_rank": 136,
+        "global_player_count": 136,
         "hunting_since": "11/8/25"
       }
     },
@@ -251,18 +251,18 @@
       "season_rank": 2964,
       "wildcard_rank": 2902,
       "lifetime": {
-        "cumulative_score": 30353,
-        "bucks_killed": 38,
-        "critters_killed": 21,
-        "dangerous_trophies": 1,
-        "perfect_sites": 11,
+        "cumulative_score": 47241,
+        "bucks_killed": 59,
+        "critters_killed": 36,
+        "dangerous_trophies": 2,
+        "perfect_sites": 16,
         "double_perfect_bonus": 0,
         "longest_perfect_streak": 5,
         "marksman_awards": 0,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 52,
-        "global_player_count": 87,
+        "global_rank": 40,
+        "global_player_count": 136,
         "hunting_since": "9/3/26"
       }
     },
@@ -290,8 +290,8 @@
         "marksman_awards": 0,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 87,
-        "global_player_count": 87,
+        "global_rank": 136,
+        "global_player_count": 136,
         "hunting_since": "2/4/06"
       }
     },
@@ -319,8 +319,8 @@
         "marksman_awards": 1,
         "showdown_wins": 0,
         "showdown_losses": 3,
-        "global_rank": 87,
-        "global_player_count": 87,
+        "global_rank": 136,
+        "global_player_count": 136,
         "hunting_since": "1/1/06"
       }
     },
@@ -348,8 +348,8 @@
         "marksman_awards": 0,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 87,
-        "global_player_count": 87,
+        "global_rank": 136,
+        "global_player_count": 136,
         "hunting_since": "11/14/25"
       }
     },
@@ -377,8 +377,8 @@
         "marksman_awards": 1,
         "showdown_wins": 1,
         "showdown_losses": 4,
-        "global_rank": 87,
-        "global_player_count": 87,
+        "global_rank": 136,
+        "global_player_count": 136,
         "hunting_since": "9/27/07"
       }
     },
@@ -396,18 +396,18 @@
       "season_rank": 3931,
       "wildcard_rank": 3868,
       "lifetime": {
-        "cumulative_score": 7428,
-        "bucks_killed": 9,
-        "critters_killed": 4,
-        "dangerous_trophies": 1,
-        "perfect_sites": 1,
+        "cumulative_score": 14314,
+        "bucks_killed": 18,
+        "critters_killed": 6,
+        "dangerous_trophies": 2,
+        "perfect_sites": 2,
         "double_perfect_bonus": 0,
         "longest_perfect_streak": 1,
         "marksman_awards": 0,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 87,
-        "global_player_count": 87,
+        "global_rank": 108,
+        "global_player_count": 136,
         "hunting_since": "9/3/26"
       }
     },
@@ -435,8 +435,8 @@
         "marksman_awards": 0,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 87,
-        "global_player_count": 87,
+        "global_rank": 136,
+        "global_player_count": 136,
         "hunting_since": "5/1/26"
       }
     }
