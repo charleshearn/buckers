@@ -2,7 +2,7 @@
   "location": "Alloy",
   "city": "New York",
   "state": "NY",
-  "fetched_at": "2026-09-25T15:50:13+00:00",
+  "fetched_at": "2026-09-26T14:59:01+00:00",
   "source": "https://www.bigbuckhunter.com/world/qualifiers",
   "players": [
     {
@@ -29,8 +29,8 @@
         "marksman_awards": 11,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 188,
-        "global_player_count": 912,
+        "global_rank": 192,
+        "global_player_count": 968,
         "hunting_since": "4/9/25"
       }
     },
@@ -48,18 +48,18 @@
       "season_rank": 282,
       "wildcard_rank": 249,
       "lifetime": {
-        "cumulative_score": 2950301,
-        "bucks_killed": 3923,
-        "critters_killed": 1878,
-        "dangerous_trophies": 123,
-        "perfect_sites": 997,
+        "cumulative_score": 2964382,
+        "bucks_killed": 3938,
+        "critters_killed": 1896,
+        "dangerous_trophies": 124,
+        "perfect_sites": 1002,
         "double_perfect_bonus": 14,
         "longest_perfect_streak": 5,
         "marksman_awards": 7,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 912,
-        "global_player_count": 912,
+        "global_rank": 349,
+        "global_player_count": 968,
         "hunting_since": "3/21/25"
       }
     },
@@ -87,8 +87,8 @@
         "marksman_awards": 0,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 912,
-        "global_player_count": 912,
+        "global_rank": 968,
+        "global_player_count": 968,
         "hunting_since": "1/27/26"
       }
     },
@@ -116,8 +116,8 @@
         "marksman_awards": 0,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 302,
-        "global_player_count": 912,
+        "global_rank": 317,
+        "global_player_count": 968,
         "hunting_since": "4/11/25"
       }
     },
@@ -145,8 +145,8 @@
         "marksman_awards": 2,
         "showdown_wins": 0,
         "showdown_losses": 1,
-        "global_rank": 443,
-        "global_player_count": 912,
+        "global_rank": 467,
+        "global_player_count": 968,
         "hunting_since": "3/19/25"
       }
     },
@@ -174,8 +174,8 @@
         "marksman_awards": 0,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 912,
-        "global_player_count": 912,
+        "global_rank": 968,
+        "global_player_count": 968,
         "hunting_since": "7/15/25"
       }
     },
@@ -203,8 +203,8 @@
         "marksman_awards": 0,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 912,
-        "global_player_count": 912,
+        "global_rank": 968,
+        "global_player_count": 968,
         "hunting_since": "6/3/25"
       }
     },
@@ -232,8 +232,8 @@
         "marksman_awards": 0,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 912,
-        "global_player_count": 912,
+        "global_rank": 968,
+        "global_player_count": 968,
         "hunting_since": "11/8/25"
       }
     },
@@ -261,8 +261,8 @@
         "marksman_awards": 0,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 49,
-        "global_player_count": 912,
+        "global_rank": 52,
+        "global_player_count": 968,
         "hunting_since": "9/3/26"
       }
     },
@@ -290,8 +290,8 @@
         "marksman_awards": 0,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 912,
-        "global_player_count": 912,
+        "global_rank": 968,
+        "global_player_count": 968,
         "hunting_since": "2/4/06"
       }
     },
@@ -319,8 +319,8 @@
         "marksman_awards": 1,
         "showdown_wins": 0,
         "showdown_losses": 3,
-        "global_rank": 912,
-        "global_player_count": 912,
+        "global_rank": 968,
+        "global_player_count": 968,
         "hunting_since": "1/1/06"
       }
     },
@@ -348,8 +348,8 @@
         "marksman_awards": 0,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 912,
-        "global_player_count": 912,
+        "global_rank": 968,
+        "global_player_count": 968,
         "hunting_since": "11/14/25"
       }
     },
@@ -377,8 +377,8 @@
         "marksman_awards": 1,
         "showdown_wins": 1,
         "showdown_losses": 4,
-        "global_rank": 870,
-        "global_player_count": 912,
+        "global_rank": 923,
+        "global_player_count": 968,
         "hunting_since": "9/27/07"
       }
     },
@@ -406,8 +406,8 @@
         "marksman_awards": 0,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 106,
-        "global_player_count": 912,
+        "global_rank": 110,
+        "global_player_count": 968,
         "hunting_since": "9/3/26"
       }
     },
@@ -435,8 +435,8 @@
         "marksman_awards": 0,
         "showdown_wins": 0,
         "showdown_losses": 0,
-        "global_rank": 912,
-        "global_player_count": 912,
+        "global_rank": 968,
+        "global_player_count": 968,
         "hunting_since": "5/1/26"
       }
     }
